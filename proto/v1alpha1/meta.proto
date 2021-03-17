@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+// Meta package defines protobuf serialization of standard COSI resources from the 'meta' namespace.
+package cosi.resource.meta;
+
+option go_package = "github.com/cosi-project/runtime/api/v1alpha1";
+
+// NamespaceSpec is the protobuf serialization of the Namespace resource.
+message NamespaceSpec {
+    // Description of the namespace.
+    string description = 1;
+}
+
+// ResourceDefinitionSpec is the protobuf serialization of the ResourceDefinition resource.
+message ResourceDefinitionSpec {
+	// Canonical type name.
+	string resource_type = 1;
+	// Displayed human-readable type name.
+	string display_type = 2;
+
+	// Default namespace to look for the resource if no namespace is given.
+	string default_namespace = 3;
+
+	// Human-readable aliases.
+	repeated string aliases = 4;
+	// All aliases for automatic matching.
+	repeated string all_aliases = 5;
+
+    message PrintColumn {
+        string name = 1;
+        string json_path = 2;
+    }
+
+	// Additional columns to print in table output.
+	repeated PrintColumn print_columns = 6;
+
+    enum Sensitivity {
+        NON_SENSITIVE = 0;
+        SENSITIVE = 1;
+    }
+
+	// Sensitivity indicates how secret resource of this type is.
+	// The empty value represents a non-sensitive resource.
+	Sensitivity sensitivity = 7;
+}
