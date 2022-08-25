@@ -290,17 +290,22 @@ message RuntimeCreateRequest {
 }
 
 message RuntimeCreateResponse {
+    resource.Resource resource = 1;
 }
 
 // Update RPC
 
 message RuntimeUpdateRequest {
     string controller_token = 1;
-    string current_version = 2;
+
+    reserved 2;
+    reserved "current_version";
+
     resource.Resource new_resource = 3;
 }
 
 message RuntimeUpdateResponse {
+    resource.Resource resource = 1;
 }
 
 // Teardown RPC

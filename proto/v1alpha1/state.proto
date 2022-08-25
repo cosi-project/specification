@@ -102,12 +102,15 @@ message CreateOptions {
 }
 
 message CreateResponse {
+    resource.Resource resource = 1;
 }
 
 // Update RPC
 
 message UpdateRequest {
-    string current_version = 1;
+    reserved 1;
+    reserved "current_version";
+
     resource.Resource new_resource = 2;
 
     UpdateOptions options = 3;
@@ -119,6 +122,7 @@ message UpdateOptions {
 }
 
 message UpdateResponse {
+    resource.Resource resource = 1;
 }
 
 // Destroy RPC
