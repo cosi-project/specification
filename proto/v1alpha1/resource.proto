@@ -9,11 +9,12 @@ import "google/protobuf/timestamp.proto";
 
 // Metadata represents resource metadata.
 //
-// (namespace, type, id) is a recource pointer.
+// (namespace, type, id) is a resource pointer.
 // (version) is a current resource version.
 // (owner) is filled in for controller-managed resources with controller name.
 // (phase) indicates whether resource is going through tear down phase.
 // (finalizers) are attached controllers blocking teardown of the resource.
+// (labels) and (annotations) are free-form key-value pairs; labels allow queries.
 message Metadata {
     string namespace = 1;
     string type = 2;
@@ -24,6 +25,7 @@ message Metadata {
     google.protobuf.Timestamp created = 7;
     google.protobuf.Timestamp updated = 8;
     repeated string finalizers = 9;
+    map<string, string> annotations = 11;
     map<string, string> labels = 10;
 }
 
