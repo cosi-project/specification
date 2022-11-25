@@ -10,12 +10,15 @@ enum EventType {
     CREATED = 0;
     UPDATED = 1;
     DESTROYED = 2;
+    BOOTSTRAPPED = 3;
+    ERRORED = 4;
 }
 
 // Event is emitted when resource changes.
 message Event {
     Resource resource = 1;
     Resource old = 3;
+    optional string error = 4;
     EventType event_type = 2;
 }
 
@@ -150,6 +153,11 @@ message WatchRequest {
     optional string id = 3;
 
     WatchOptions options = 4;
+
+    // Supported API versions:
+    // 0 (not set): event types Created,Updated,Deleted
+    // 1: additional event types Bootstrapped,Errored
+    int32 api_version = 5;
 }
 
 message WatchOptions {
