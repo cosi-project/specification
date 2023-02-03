@@ -86,6 +86,7 @@ message ListRequest {
 
 message ListOptions {
     resource.LabelQuery label_query = 1;
+    resource.IDQuery id_query = 2;
 }
 
 message ListResponse {
@@ -164,6 +165,7 @@ message WatchOptions {
     bool bootstrap_contents = 1;
     int32 tail_events = 2;
     resource.LabelQuery label_query = 3;
+    resource.IDQuery id_query = 4;
 }
 
 message WatchResponse {

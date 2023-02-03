@@ -65,3 +65,8 @@ message LabelTerm {
 message LabelQuery {
     repeated LabelTerm terms = 1;
 }
+
+// IDQuery is a query on resource metadata ID.
+message IDQuery {
+    string regexp = 1;
+}
