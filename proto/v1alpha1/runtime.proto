@@ -315,6 +315,11 @@ message RuntimeTeardownRequest {
     string namespace = 2;
     string type = 3;
     string id = 4;
+    Options options = 5;
+}
+
+message Options {
+    optional string owner = 1;
 }
 
 message RuntimeTeardownResponse {
@@ -328,6 +333,8 @@ message RuntimeDestroyRequest {
     string namespace = 2;
     string type = 3;
     string id = 4;
+
+    Options options = 5;
 }
 
 message RuntimeDestroyResponse {
