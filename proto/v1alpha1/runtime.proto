@@ -249,7 +249,7 @@ message RuntimeGetResponse {
 // List RPC
 
 message RuntimeListOptions {
-    resource.LabelQuery label_query = 1;
+    repeated resource.LabelQuery label_query = 1;
 }
 
 message RuntimeListRequest {
