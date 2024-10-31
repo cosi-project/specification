@@ -20,6 +20,7 @@ message Event {
     Resource old = 3;
     optional string error = 4;
     EventType event_type = 2;
+    optional bytes bookmark = 5;
 }
 
 service State {
@@ -167,6 +168,7 @@ message WatchOptions {
     repeated resource.LabelQuery label_query = 3;
     resource.IDQuery id_query = 4;
     bool aggregated = 5;
+    optional bytes start_from_bookmark = 6;
 }
 
 message WatchResponse {
