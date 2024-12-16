@@ -173,4 +173,9 @@ message WatchOptions {
 
 message WatchResponse {
     repeated Event event = 1;
+
+    // Suppprted API versions:
+    // 0 (not set): doesn't support watch bookmarks
+    // 1: supports watch bookmarks
+    int32 api_version = 2;
 }
