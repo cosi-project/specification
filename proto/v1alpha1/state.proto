@@ -12,6 +12,7 @@ enum EventType {
     DESTROYED = 2;
     BOOTSTRAPPED = 3;
     ERRORED = 4;
+    NOOP = 5;
 }
 
 // Event is emitted when resource changes.
@@ -169,6 +170,7 @@ message WatchOptions {
     resource.IDQuery id_query = 4;
     bool aggregated = 5;
     optional bytes start_from_bookmark = 6;
+    bool bootstrap_bookmark = 7;
 }
 
 message WatchResponse {
