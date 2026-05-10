@@ -58,6 +58,13 @@ service State {
 	// Watch sends initial resource state as the very first event on the channel,
 	// and then sends any updates to the resource as events.
 	rpc Watch(WatchRequest) returns (stream WatchResponse);
+
+	// TeardownAndDestroy tears down a resource and destroys it once all finalizers are gone.
+	//
+	// If a resource doesn't exist, error is returned.
+	// It's not an error to tear down a resource which is already being torn down.
+	// The call blocks until the resource has no pending finalizers and has been destroyed.
+	rpc TeardownAndDestroy(TeardownAndDestroyRequest) returns (TeardownAndDestroyResponse);
 }
 
 // Get RPC
@@ -175,4 +182,21 @@ message WatchOptions {
 
 message WatchResponse {
     repeated Event event = 1;
+}
+
+// TeardownAndDestroy RPC
+
+message TeardownAndDestroyRequest {
+    string namespace = 1;
+    string type = 2;
+    string id = 3;
+
+    TeardownAndDestroyOptions options = 4;
+}
+
+message TeardownAndDestroyOptions {
+    string owner = 1;
+}
+
+message TeardownAndDestroyResponse {
 }
