@@ -59,6 +59,13 @@ service State {
 	// and then sends any updates to the resource as events.
 	rpc Watch(WatchRequest) returns (stream WatchResponse);
 
+	// Teardown a resource (mark as being destroyed).
+	//
+	// If a resource doesn't exist, error is returned.
+	// It's not an error to tear down a resource which is already being torn down.
+	// Teardown returns a flag telling whether it's fine to destroy a resource.
+	rpc Teardown(TeardownRequest) returns (TeardownResponse);
+
 	// TeardownAndDestroy tears down a resource and destroys it once all finalizers are gone.
 	//
 	// If a resource doesn't exist, error is returned.
@@ -182,6 +189,25 @@ message WatchOptions {
 
 message WatchResponse {
     repeated Event event = 1;
+}
+
+// Teardown RPC
+
+message TeardownRequest {
+    string namespace = 1;
+    string type = 2;
+    string id = 3;
+
+    TeardownOptions options = 4;
+}
+
+message TeardownOptions {
+    string owner = 1;
+}
+
+message TeardownResponse {
+    // DestroyReady is true when the resource has no pending finalizers and is ready to be destroyed.
+    bool destroy_ready = 1;
 }
 
 // TeardownAndDestroy RPC
